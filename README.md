@@ -20,9 +20,10 @@ public static long hash(long x, long y, long z) {
 }
 ```
 
-令 $\bar{x},\bar{y},\bar{z}$ 为 Java 参数各自低 32 位的零扩展，定义
-$P(y,z)=2^{32}\bar{y}+\bar{z}$。由于两部分占据互不重叠的 32 位区间，该加法等价于 Java 代码中的按位或。
-令 $S(v)=v\oplus\operatorname{lshr}(v,33)$，其中 $\operatorname{lshr}$ 表示逻辑右移。
+令 $\bar x,\bar y,\bar z$ 为 Java 参数各自低 32 位的零扩展，定义 $P(y,z)=2^{32}\bar y+\bar z$。由于两部分占据互不重叠的 32 位区间，该加法等价于 Java 代码中的按位或。
+
+令 $S(v)=v\oplus\mathrm{lshr}(v,33)$，其中 $\mathrm{lshr}(v,33)$ 表示对 v 逻辑右移 33 位，对应 Java 的 `>>>`。
+
 $M^{(1)},M^{(2)}$ 为代码中依次出现的两个乘数。乘法按 $2^{64}$ 回绕。
 
 $$
