@@ -20,14 +20,17 @@ public static long hash(long x, long y, long z) {
 }
 ```
 
-令 $\bar x,\bar y,\bar z$ 为 Java 参数各自低 32 位的零扩展，$P(y,z)=(\bar y\ll32)\mathbin{|}\bar z$。令 $S(v)=v\oplus(v\mathbin{\gg_{\!u}}33)$，其中右移为逻辑右移。$M_1,M_2$ 为代码中依次出现的两个乘数。乘法按 $2^{64}$ 回绕。
+令 $\bar{x},\bar{y},\bar{z}$ 为 Java 参数各自低 32 位的零扩展，定义
+$P(y,z)=2^{32}\bar{y}+\bar{z}$。由于两部分占据互不重叠的 32 位区间，该加法等价于 Java 代码中的按位或。
+令 $S(v)=v\oplus\operatorname{lshr}(v,33)$，其中 $\operatorname{lshr}$ 表示逻辑右移。
+$M^{(1)},M^{(2)}$ 为代码中依次出现的两个乘数。乘法按 $2^{64}$ 回绕。
 
 $$
-F(v)=S\bigl(S(vM_1)M_2\bigr),\qquad
-h(x,y,z)=P(y,z)\oplus F(\bar x).
+F(v)=S\bigl(S(vM^{(1)})M^{(2)}\bigr),\qquad
+h(x,y,z)=P(y,z)\oplus F(\bar{x}).
 $$
 
-Java 方法返回 $F(S(h(x,y,z)))$。内层首次右移异或在零扩展的 $\bar x$ 上不改变值。外层 $F\circ S$ 是双射，因此 Java 哈希相等当且仅当 Lean 中的 $h$ 相等。
+Java 方法返回 $F(S(h(x,y,z)))$。内层首次右移异或在零扩展的 $\bar{x}$ 上不改变值。外层 $F\circ S$ 是双射，因此 Java 哈希相等当且仅当 Lean 中的 $h$ 相等。
 
 ## 主定理
 
@@ -37,7 +40,8 @@ $$
 h(ax+i,by+j,cz+k)=h(x,y,z)
 $$
 
-对所有 32 位坐标 $x,y,z$ 成立，其中坐标运算按 $2^{32}$ 回绕，则 $(a,b,c,i,j,k)=(1,1,1,0,0,0)$。
+对所有 32 位坐标 $x,y,z$ 成立，其中坐标运算按 $2^{32}$ 回绕，则
+$(a,b,c,i,j,k)=(1,1,1,0,0,0)$。
 
 主定理是 `HashProof.no_nontrivial_affine_collision`。
 
