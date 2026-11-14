@@ -1,0 +1,6 @@
+name = "hash-proof"
+version = "1.0.0"
+defaultTargets = ["HashProof"]
+
+[[lean_lib]]
+name = "HashProof"
