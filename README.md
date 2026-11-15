@@ -4,16 +4,14 @@
 
 ## 主定理
 
-若
+令 $R=\mathbb Z/2^{32}\mathbb Z$，定义 $h(x,y,z)=\operatorname{pack}(y,z)\oplus H(x)$。
+其中 $\operatorname{pack}$ 将 $y$、$z$ 分别放入高、低半字，$H$ 对零扩展后的 $x$ 应用 `mix64`。
 
-$$
-h(ax+i,by+j,cz+k)=h(x,y,z)
-$$
+对任意 $A\in M_3(R)$ 和 $t\in R^3$，若对所有 $v\in R^3$ 都有 $h(Av+t)=h(v)$，则
 
-对所有 32 位坐标 $x,y,z$ 成立，其中坐标运算按 $2^{32}$ 回绕，则
-$(a,b,c,i,j,k)=(1,1,1,0,0,0)$。
+$$ A=I_3,\qquad t=0. $$
 
-主定理是 `HashProof.no_nontrivial_affine_collision`。
+主定理是 `HashProof.no_nontrivial_general_affine_collision`。
 
 ## 构建与审计
 

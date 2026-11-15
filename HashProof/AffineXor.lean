@@ -43,7 +43,7 @@ private theorem xor_one_slope (x : BitVec 32) :
       _ = x + (-1#32) := by rw [hadd]
       _ = (-1#32) + x := BitVec.add_comm _ _
 
-private theorem xor_intMin (x : BitVec 32) :
+theorem xor_intMin (x : BitVec 32) :
     x ^^^ intMin 32 = x + intMin 32 := by
   have add_if_high_clear (v : BitVec 32) (h : v.getLsbD 31 = false) :
       v + intMin 32 = v ^^^ intMin 32 := by

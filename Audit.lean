@@ -8,3 +8,5 @@ import HashProof
 #print axioms HashProof.affine_xor_iff
 #print axioms HashProof.nonzeroDeltas_not_in_image
 #print axioms HashProof.no_nontrivial_affine_collision
+#print axioms HashProof.topBitDiff_period_iff
+#print axioms HashProof.no_nontrivial_general_affine_collision
